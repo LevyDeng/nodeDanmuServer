@@ -14,6 +14,9 @@ io.on('connection', function (socket) {
         console.log(data);
         //client.lpush('danmaku', JSON.stringify(data), redis.print);
     });
+    socket.on("error", function (err) {
+        console.log(err);
+    })
 });
 
 io.listen(80);
