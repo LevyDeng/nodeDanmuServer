@@ -1,0 +1,16 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<script type="text/javascript">
+    var socket = new WebSocket("ws://localhost:4000")
+    var name = "web"
+    socket.onopen = function () {
+        socket.send("webinit" + "-" + name);
+    }
+    socket.onmessage = function (data) {
+        var message = data
+        document.getElementById("show").innerHTML +=  "<br>"+message
+    }
+</script>
+…………………………………………
+<div id="show">初始的一句话</div>
