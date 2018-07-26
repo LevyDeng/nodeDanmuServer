@@ -17,19 +17,13 @@ function socketMain(nsp, roomName) {
         socket.on('danmaku', function (msg) {
             var data = {"socketid": socket.id, "cid":roomName, "msg":msg, createTime:moment.unix()};
             //io.emit("broadcasted danmaku", msg);
-            nsp.emit("broadcasted danmaku", msg);
+            //nsp.emit("broadcasted danmaku", msg);
+            socket.broadcast.emit("broadcasted danmaku", msg);
             console.log(msg);
-            client.lpush('danmu', JSON.stringify(data), redis.print);
+            //client.lpush('danmu', JSON.stringify(data), redis.print);
         });
     });
     
 }
-io.on("connection",function (socket) {
-    socket.on("group1",function () {
-        socket.join("group1");
-    });
-    socket.on("disconnect",function () {
-        socket.leave("group1");
-    });
-});
-io.listen(80);
+
+io.listen(3000);
