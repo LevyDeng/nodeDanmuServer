@@ -11,7 +11,7 @@ const TULING_URL = "http://openapi.tuling123.com/openapi/api/v2";
 const redis = require('socket.io-redis');
 io.adapter(redis({host:'localhost', port: 6379}));
 const moment = require("moment");
-const {client} = require("./redis");
+//const {client} = require("./redis");
 
 const CHAT_ROBOT="on";
 
