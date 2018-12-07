@@ -28,9 +28,10 @@ function socketMain(nsp, roomName) {
         socket.on('danmaku', function (msg) {
             var data = {"socketid": socket.id, "cid":roomName, "msg":msg, createTime:moment.unix()};
             //io.emit("broadcasted danmaku", msg);
-            nsp.emit("broadcasted danmaku", msg);
+            //nsp.emit("broadcasted danmaku", msg);
+            socket.broadcast.emit("broadcasted danmaku", msg);
             console.log(msg);
-            client.lpush('danmu', JSON.stringify(data), redis.print);
+            //client.lpush('danmu', JSON.stringify(data), redis.print);
             if (CHAT_ROBOT=="on"){
                 chatRobot(socket,msg);
             }
