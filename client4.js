@@ -1,4 +1,4 @@
-var socket = require('socket.io-client')('http://localhost');
+var socket = require('socket.io-client')('http://localhost:3000');
 socket.on('connect', function(){
     socket.emit("danmaku","hehe");
 });

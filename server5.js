@@ -14,6 +14,7 @@ const moment = require("moment");
 //const {client} = require("./redis");
 
 const CHAT_ROBOT="on";
+var myDate=new Date();
 
 var nameBox = [ '/cntv', '/sohuvideo', '/other' ];
 for (var item in nameBox){
@@ -30,7 +31,7 @@ function socketMain(nsp, roomName) {
             //io.emit("broadcasted danmaku", msg);
             //nsp.emit("broadcasted danmaku", msg);
             socket.broadcast.emit("broadcasted danmaku", msg);
-            console.log(socket.id.toString()+":"+moment.unix().toString()+":"+msg);
+            console.log(socket.id.toString()+":"+myDate.toLocaleString()+":"+msg);
             //client.lpush('danmu', JSON.stringify(data), redis.print);
             if (CHAT_ROBOT=="on"){
                 chatRobot(socket,msg);
@@ -64,8 +65,8 @@ function chatRobot(socket,msg){
     }, function (error,response,body) {
         if (!error && response.statusCode == 200) {
             resultText = body.results[0].values.text;
-            console.log(socket.id.toString()+":"+moment.unix().toString()+":"+msg);
-            socket.emit(resultText);
+            console.log(socket.id.toString()+":"+myDate.toLocaleString()+":"+resultText);
+            socket.emit("broadcasted danmaku", resultText);
         }
     });
 }
